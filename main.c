@@ -1,15 +1,15 @@
 #include <stdio.h> //biblioteca dos printf's e scanf's
 #include <string.h> //biblioteca que manipula strings
-#include <locale.h> //biblioteca que possibilita o uso de acentuaÁ„o nos prints
+#include <locale.h> //biblioteca que possibilita o uso de acentua√ß√£o nos prints
 #include <stdlib.h> //biblioteca que tem o comando para limpar a tela
 #include <windows.h> //Biblioteca que permite mudar a cor do print
 #include <Windows.h> //Biblioteca que tem o comando Sleep(tempo);
 
-// para limpar a tela È sÛ usar system("cls");
+// para limpar a tela a s√© usar system("cls");
 
 #define nome_do_jogo "Projeto" //constante que guarda o nome do jogo
 
-//Constantes que guardam o codigo de cada cor(usado no procedimento mudar_cor)
+//Constantes que guardam o c√≥digo de cada cor(usado no procedimento mudar_cor)
 #define vermelho_escuro 4
 #define cinza 8
 #define azul 9
@@ -18,13 +18,13 @@
 #define vermelho 12
 #define roxo 13
 #define amarelo 14
-//variavel que vai ficar responsavel por ficar recebendo a escolha do player
+//variavel que vai ficar respons√°vel por ficar recebendo a escolha do player
 int escolha = 0;
-//Variavel que vai guardar a posiÁ„o inicial do player 1
+//Variavel que vai guardar a posi√ß√£o inicial do player 1
 int pos_p1 = 33;
-//Variavel que vai guardar a posiÁ„o inicial do player 2
+//Variavel que vai guardar a posi√ß√£o inicial do player 2
 int pos_p2 = 35;
-//Variavel que faz o controle se os players j· jogaram
+//Variavel que faz o controle se os players j√° jogaram
 int p1_ja_jogou = 0, p2_ja_jogou = 0;
 
 //Variavel que vai guardar o HP do player 1
@@ -32,37 +32,39 @@ int hp_p1 = 15;
 //Variavel que vai guardar o HP do player 2
 int hp_p2 = 15;
 
-//Variavel do tipo bool que vai guardar se o player est· se defendendo
+//Variavel do tipo bool que vai guardar se o player est√° se defendendo
 int p1_defendendo = 0, p2_defendendo = 0;
 
-//Variavel bool que vai guardar se o player est· atacando
+//Variavel bool que vai guardar se o player est√° atacando
 int p1_atacando = 0, p2_atacando = 0;
-//Variavel que guarda a quantos turnos os players est„o se defendendo
+//Variavel que guarda a quantos turnos os players est√£o se defendendo
 int turnos_p1_defendendo = 0, turnos_p2_defendendo = 0;
 int turnos = 1; //turnos do jogo
 
-void mudar_cor(int cor) //funÁ„o para mudar a cor do print
+void mudar_cor(int cor) //fun√ß√£o para mudar a cor do print
 {
-    //IMPORTANTE: UMA VEZ CHAMADA ESSA FUN«√O, TODOS OS PRINTS SAIR√O COM A MESMA COR, PARA VOLTAR
-    //AO NORMAL, TEM QUE CHAMAR ELA, PASSANDO COMO PAR¬METRO -1
-    /*codigos das cores:
-    cinza - 8
-    azul - 9
-    verde - 10
-    celeste - 11
-    vermelho - 12
-    roxo - 13
-    amarelo - 14
-    resetar - 15*/
+    //IMPORTANTE: UMA VEZ CHAMADA ESSA fun√ß√£o, TODOS OS PRINTS SAIR√ÉO COM A MESMA COR, PARA VOLTAR
+    //AO NORMAL, TEM QUE CHAMAR ELA, PASSANDO COMO PAR√ÇMETRO -1
+    /*
+     * c√≥digos das cores:
+     * cinza - 8
+     * azul - 9
+     * verde - 10
+     * celeste - 11
+     * vermelho - 12
+     * roxo - 13
+     * amarelo - 14
+     * resetar - 15
+     */
     int num_cor = 15;
     switch (cor) //verifica qual cor foi passado como parametro
     {
         case 4: //se o que foi digitado for 4(vermelho escuro):
-            num_cor = 4;//a variavel vai receber o codigo conforme o comentario anterior
-            break; //pula a comparaÁ„o com os outros casos
-        case 8://se o que foi digitado for 8(cinza):
-            num_cor = 8; //a variavel vai receber o codigo conforme o comentario anterior
-            break; //pula a comparaÁ„o com os outros casos
+            num_cor = 4; //a variavel vai receber o c√≥digo conforme o comentario anterior
+            break; //pula a compara√ß√£o com os outros casos
+        case 8: //se o que foi digitado for 8(cinza):
+            num_cor = 8; //a variavel vai receber o c√≥digo conforme o comentario anterior
+            break; //pula a compara√ß√£o com os outros casos
         case 9:
             num_cor = 9;
             break;
@@ -87,15 +89,16 @@ void mudar_cor(int cor) //funÁ„o para mudar a cor do print
         default: //se nenhum dos casos for realizado, ele vai executar o default
             num_cor = 15; //reseta as cores
     }
-    //codigo para mudar a cor do print
-    HANDLE  hConsole; //n„o sei como essas 3 linhas funcionam, sÛ sei que muda a cor
+    //c√≥digo para mudar a cor do print
+    HANDLE  hConsole; //n√£o sei como essas 3 linhas funcionam, s√≥ sei que muda a cor
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, num_cor);
 }
-//FunÁ„o que vai realizar o ataque do player
-int atacar(int qual_player/*1 para player 1, e 2 para player 2*/)
+
+//fun√ß√£o que vai realizar o ataque do player
+int atacar(int qual_player /*1 para player 1, e 2 para player 2*/)
 {
-    int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1);//pega a dist‚ncia entre os players(o n˙mero de casas entre eles)
+    int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1); //pega a distancia entre os players(o n√∫mero de casas entre eles)
 
     //se os players estiverem perto o bastante para atacar
     if (quantas_casas_tem_entre_os_players <= 3 && quantas_casas_tem_entre_os_players > 0)
@@ -105,7 +108,7 @@ int atacar(int qual_player/*1 para player 1, e 2 para player 2*/)
             p1_atacando = 1;
             return 1; //se o player conseguiu atacar
         }
-        else //senao, a variavel do player 2, fica True
+        else //sen√£o, a variavel do player 2, fica True
         {
             p2_atacando = 1;
             return 1; //se o player conseguiu atacar
@@ -113,48 +116,49 @@ int atacar(int qual_player/*1 para player 1, e 2 para player 2*/)
     }
     return 0; //se o player estiver muito longe, retorna falso
 }
+
 void ataque(int ataque_p1, int ataque_p2)
 {
     // define o dano valendo 3
     int dano = 3;
-    if(ataque_p1){// se o player 1 atacar, ele pede uma reaÁ„o do player 2.
+    if(ataque_p1){ // se o player 1 atacar, ele pede uma rea√ß√£o do player 2.
         status();
         escolhas_p2();
-        if(! p2_defendendo) //se o player 2 n„o estiver e defendendo
+        if(! p2_defendendo) //se o player 2 n√£o estiver e defendendo
         {
             mudar_cor(vermelho);
-            printf("O player 1 est· atacando, o que vocÍ quer fazer? ");
+            printf("O player 1 est√° atacando, o que voc√™ quer fazer? ");
             mudar_cor(-1);
             scanf("%d", &escolha);
             p2_ja_jogou = 1;
-            int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1);//pega a dist‚ncia entre os players
+            int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1); //pega a distancia entre os players
 
-            if (escolha == 1) //escolheu avanÁar
+            if (escolha == 1) //escolheu avan√ßar
             {
                 int maximo_de_casas_pode_andar = 5;
-                if ((pos_p2 - pos_p1+1) >= 5) //se o n˙mero de casas entre os players for maior que 5, o n˙mero maximo de casas fica com 5
+                if ((pos_p2 - pos_p1+1) >= 5) //se o n√∫mero de casas entre os players for maior que 5, o n√∫mero maximo de casas fica com 5
                 {
                     maximo_de_casas_pode_andar = 5;
                 }
                 else
                 {
-                    maximo_de_casas_pode_andar = (pos_p2 - (pos_p1+1)); //pega quantas casas tem livre para a movimentaÁ„o
-                    //                                             +1 para que os players n„o fiquem na mesma casa
+                    maximo_de_casas_pode_andar = (pos_p2 - (pos_p1+1)); //pega quantas casas tem livre para a movimenta√ß√£o
+                    //                                            +1 para que os players n√£o fiquem na mesma casa
                 }
-                printf("Digite quantas casas vocÍ quer andar (de 1 a %d): ", maximo_de_casas_pode_andar);
-                scanf("%d", &escolha); //recebe quantas casas o player quer avanÁas
+                printf("Digite quantas casas voc√™ quer andar (de 1 a %d): ", maximo_de_casas_pode_andar);
+                scanf("%d", &escolha); //recebe quantas casas o player quer avan√ßar
                 if (escolha >= 1 && escolha <= maximo_de_casas_pode_andar)
                 {
-                    if (quantas_casas_tem_entre_os_players > 1) //se os jogadores n„o estiverem um olhando para a cara do outro
+                    if (quantas_casas_tem_entre_os_players > 1) //se os jogadores n√£o estiverem um olhando para a cara do outro
                     {
-                        if (pos_p2 - (pos_p1+escolha) >= 0) //se, quando o player andar, ele n„o atravessar o player 1
+                        if (pos_p2 - (pos_p1+escolha) >= 0) //se, quando o player andar, ele n√£o atravessar o player 1
                         {
-                            pos_p2 -= escolha; //a posiÁ„o atual do player 2 tira quantas casas ele escolheu andar
+                            pos_p2 -= escolha; //a posi√ß√£o atual do player 2 tira quantas casas ele escolheu andar
                         }
                         else
                         {
                             pos_p2 -= (pos_p2 - (pos_p1+1)); //mais do que esse valor o player 2 vai passar para o lado esquerdo
-                            //                         +1 para que os players n„o fiquem na mesma casa
+                            //                         +1 para que os players n√£o fiquem na mesma casa
                         }
                     }
                 }
@@ -170,29 +174,29 @@ void ataque(int ataque_p1, int ataque_p2)
             {
                 int maximo_de_casas_pode_recuar = 5;
 
-                //verificaÁ„o de quantas casas livres para recuar
+                //verifica√ß√£o de quantas casas livres para recuar
 
-                if (pos_p2 < 45) //se o n˙mero de casas entre o player e a parede (posiÁ„o 50) for menor que 45
+                if (pos_p2 < 45) //se o n√∫mero de casas entre o player e a parede (posi√ß√£o 50) for menor que 45
                 {
                     maximo_de_casas_pode_recuar = 5;
                 }
                 else
                 {
                     maximo_de_casas_pode_recuar = (50 - pos_p2);
-                    //se ele estiver menos de 5 casas da parede, ele sÛ vai poder recuar , no maximo, a posiÁ„o dele -1
-                    //pois, ele n„o vai poder entrar na parede(posiÁ„o 0)
+                    //se ele estiver menos de 5 casas da parede, ele s√≥ vai poder recuar , no maximo, a posi√ß√£o dele -1
+                    //pois, ele n√£o vai poder entrar na parede(posi√ß√£o 0)
                 }
 
-                //verificaÁ„o de escolha
+                //verifica√ß√£o de escolha
                 if (maximo_de_casas_pode_recuar != 0) //se o jogador estiver com pelo menos 1 casa para recuar
                 {
-                    printf("Digite quantas casas vocÍ quer recuar (de 1 a %d): ", maximo_de_casas_pode_recuar);
+                    printf("Digite quantas casas voc√™ quer recuar (de 1 a %d): ", maximo_de_casas_pode_recuar);
                     scanf("%d", &escolha); //recebe quantas casas o player quer recuar
                     if (escolha >= 1 && escolha <= maximo_de_casas_pode_recuar) //se a escolha do player for valida (esta dentro das escolhas)
                     {
-                        pos_p2 += escolha; //o valor È simplesmente retirado, pois j· foi verificado se o n˙mero È valido
+                        pos_p2 += escolha; //o valor √© simplesmente retirado, pois j√° foi verificado se o n√∫mero √© valido
                     }
-                    else //se n„o estiver, ele perde o turno
+                    else //se n√£o estiver, ele perde o turno
                     {
                         mudar_cor(207); //mensagem com o fundo vermelho
                         printf("Escolha uma quantidade valida! Perdeu o turno");
@@ -203,7 +207,7 @@ void ataque(int ataque_p1, int ataque_p2)
                 else
                 {
                     mudar_cor(207);
-                    printf("VocÍ j· est· no canto da arena! N„o tem como recuar mais!");
+                    printf("Voc√™ j√° est√° no canto da arena! N√£o tem como recuar mais!");
                     Sleep(2000);
                     mudar_cor(-1);
                 }
@@ -216,10 +220,10 @@ void ataque(int ataque_p1, int ataque_p2)
             {
                 p2_defendendo = 1;
             }
-            else //escolheu um n˙mero menor que 1 e maior que 4
+            else //escolheu um n√∫mero menor que 1 e maior que 4
             {
                 mudar_cor(207);
-                printf("Escolha inv·lida, perdeu um turno.");
+                printf("Escolha inv√°lida, perdeu um turno.");
                 Sleep(2000);
                 mudar_cor(-1);
             }
@@ -243,38 +247,38 @@ void ataque(int ataque_p1, int ataque_p2)
         if(! p1_defendendo)
         {
             mudar_cor(vermelho);
-            printf("O player 2 est· atacando, o que vocÍ quer fazer? ");
+            printf("O player 2 est√° atacando, o que voc√™ quer fazer? ");
             mudar_cor(-1);
             scanf("%d", &escolha);
             p1_ja_jogou = 1;
-            int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1);//pega a dist‚ncia entre os players
+            int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1);//pega a distancia entre os players
 
-            if (escolha == 1) //escolheu avanÁar
+            if (escolha == 1) //escolheu avan√ßar
             {
                 int maximo_de_casas_pode_andar = 5;
-                if ((pos_p2 - pos_p1+1) >= 5) //se o n˙mero de casas entre os players for maior que 5, o n˙mero maximo de casas fica com 5
+                if ((pos_p2 - pos_p1+1) >= 5) //se o n√∫mero de casas entre os players for maior que 5, o n√∫mero maximo de casas fica com 5
                 {
                     maximo_de_casas_pode_andar = 5;
                 }
                 else
                 {
-                    maximo_de_casas_pode_andar = (pos_p2 - (pos_p1+1)); //pega quantas casas tem livre para a movimentaÁ„o
-                    //                                             +1 para que os players n„o fiquem na mesma casa
+                    maximo_de_casas_pode_andar = (pos_p2 - (pos_p1+1)); //pega quantas casas tem livre para a movimenta√ß√£o
+                    //                                             +1 para que os players n√£o fiquem na mesma casa
                 }
-                printf("Digite quantas casas vocÍ quer andar (de 1 a %d): ", maximo_de_casas_pode_andar);
-                scanf("%d", &escolha); //recebe quantas casas o player quer avanÁas
+                printf("Digite quantas casas voc√™ quer andar (de 1 a %d): ", maximo_de_casas_pode_andar);
+                scanf("%d", &escolha); //recebe quantas casas o player quer avan√ßar
                 if (escolha >= 1 && escolha <= maximo_de_casas_pode_andar)
                 {
-                    if (quantas_casas_tem_entre_os_players > 1) //se os jogadores n„o estiverem um olhando para a cara do outro
+                    if (quantas_casas_tem_entre_os_players > 1) //se os jogadores n√£o estiverem um olhando para a cara do outro
                     {
-                        if (pos_p2 - (pos_p1+escolha) >= 0) //se, quando o player andar, ele n„o atravessar o player 2
+                        if (pos_p2 - (pos_p1+escolha) >= 0) //se, quando o player andar, ele n√£o atravessar o player 2
                         {
-                            pos_p1 += escolha; //a posiÁ„o atual do player 1 soma quantas casas ele escolheu andar
+                            pos_p1 += escolha; //a posi√ß√£o atual do player 1 soma quantas casas ele escolheu andar
                         }
                         else
                         {
                             pos_p1 += (pos_p2 - (pos_p1+1)); //mais do que esse valor o player 1 vai passar para o lado direito
-                            //                         +1 para que os players n„o fiquem na mesma casa
+                            //                         +1 para que os players n√£o fiquem na mesma casa
                         }
                     }
                 }
@@ -290,29 +294,29 @@ void ataque(int ataque_p1, int ataque_p2)
             {
                 int maximo_de_casas_pode_recuar = 5;
 
-                //verificaÁ„o de quantas casas livres para recuar
+                //verifica√ß√£o de quantas casas livres para recuar
 
-                if (pos_p1 > 5) //se o n˙mero de casas entre o player e a parede (posiÁ„o 0) for maior que 5
+                if (pos_p1 > 5) //se o n√∫mero de casas entre o player e a parede (posi√ß√£o 0) for maior que 5
                 {
                     maximo_de_casas_pode_recuar = 5;
                 }
                 else
                 {
                     maximo_de_casas_pode_recuar = (pos_p1 - 1);
-                    //se ele estiver menos de 5 casas da parede, ele sÛ vai poder recuar , no maximo, a posiÁ„o dele -1
-                    //pois, ele n„o vai poder entrar na parede(posiÁ„o 0)
+                    //se ele estiver menos de 5 casas da parede, ele s√≥ vai poder recuar , no maximo, a posi√ß√£o dele -1
+                    //pois, ele n√£o vai poder entrar na parede(posi√ß√£o 0)
                 }
 
-                //verificaÁ„o de escolha
+                //verifica√ß√£o de escolha
                 if (maximo_de_casas_pode_recuar != 0) //se o jogador estiver com pelo menos 1 casa para recuar
                 {
-                    printf("Digite quantas casas vocÍ quer recuar (de 1 a %d): ", maximo_de_casas_pode_recuar);
+                    printf("Digite quantas casas voc√™ quer recuar (de 1 a %d): ", maximo_de_casas_pode_recuar);
                     scanf("%d", &escolha); //recebe quantas casas o player quer recuar
                     if (escolha >= 1 && escolha <= maximo_de_casas_pode_recuar) //se a escolha do player for valida (esta dentro das escolhas)
                     {
-                        pos_p1 -= escolha; //o valor È simplesmente retirado, pois j· foi verificado se o n˙mero È valido
+                        pos_p1 -= escolha; //o valor √© simplesmente retirado, pois j√° foi verificado se o n√∫mero √© valido
                     }
-                    else //se n„o estiver, ele perde o turno
+                    else //se n√£o estiver, ele perde o turno
                     {
                         mudar_cor(207); //mensagem com o fundo vermelho
                         printf("Escolha uma quantidade valida! Perdeu o turno");
@@ -323,7 +327,7 @@ void ataque(int ataque_p1, int ataque_p2)
                 else
                 {
                     mudar_cor(207);
-                    printf("VocÍ j· est· no canto da arena! N„o tem como recuar mais!");
+                    printf("Voc√™ j√° est√° no canto da arena! N√£o tem como recuar mais!");
                     Sleep(2000);
                     mudar_cor(-1);
                 }
@@ -336,10 +340,10 @@ void ataque(int ataque_p1, int ataque_p2)
             {
                 p1_defendendo = 1;
             }
-            else //escolheu um n˙mero menor que 1 e maior que 4
+            else //escolheu um n√∫mero menor que 1 e maior que 4
             {
                 mudar_cor(207);
-                printf("Escolha inv·lida, perdeu um turno.");
+                printf("Escolha inv√°lida, perdeu um turno.");
                 Sleep(2000);
                 mudar_cor(-1);
             }
@@ -355,16 +359,17 @@ void ataque(int ataque_p1, int ataque_p2)
             hp_p1 -= 1;
         }
     }
-    // reseta as vari·veis
+    // reseta as vari√°veis
     p1_atacando = 0;
     p2_atacando = 0;
     p2_defendendo = 0;
     p1_defendendo = 0;
 }
+
 void status() //um procedimento que da print nos status
 {
-    setlocale(LC_ALL, ""); //desabilita o padr„o portuguÍs dos prints
-    setlocale(LC_ALL, "C"); //habilita o padr„o do C, para dar print na barra de hp
+    setlocale(LC_ALL, ""); //desabilita o padr√£o portugu√™s dos prints
+    setlocale(LC_ALL, "C"); //habilita o padr√£o do C, para dar print na barra de hp
     system("cls"); //limpa a tela
     printf("\t\tTurno: %d\n", turnos);
     mudar_cor(amarelo);
@@ -374,12 +379,12 @@ void status() //um procedimento que da print nos status
     {
         mudar_cor(vermelho_escuro);
     }
-    else //sen„o, fica vermelho claro
+    else //sen√£o, fica vermelho claro
     {
         mudar_cor(vermelho);
     }
-    printf("HP:"); //comeÁa a dar print nas barras de hp do player 1
-    //printf("HP:%d\t\t\t\tHp:%d\n", hp_p1, hp_p2); //assim ele sÛ mostra os n˙meros
+    printf("HP:"); //come√ßa a dar print nas barras de hp do player 1
+    //printf("HP:%d\t\t\t\tHp:%d\n", hp_p1, hp_p2); //assim ele s√≥ mostra os n√∫meros
     for (int c = 1; c <= hp_p1; c++) //assim, ele da print nas barras conforme a quantidade de hp
     {
         //printf("|");
@@ -396,7 +401,7 @@ void status() //um procedimento que da print nos status
     {
         mudar_cor(vermelho_escuro);
     }
-    else //sen„o, fica vermelho claro
+    else //sen√£o, fica vermelho claro
     {
         mudar_cor(vermelho);
     }
@@ -415,7 +420,7 @@ void status() //um procedimento que da print nos status
     }
     mudar_cor(celeste);
     printf("\n\\");
-    for (int c = 1; c <= 50; c++)//processo para alterar a Ìcone do personagem se estiver se defendendo
+    for (int c = 1; c <= 50; c++)//processo para alterar o √≠cone do personagem se estiver se defendendo
     {
         if(c == pos_p1)
         {
@@ -462,21 +467,20 @@ void status() //um procedimento que da print nos status
     }
     setlocale(LC_ALL, "");
     printf("/\n");
-    //printf("\nPosiÁ„o:%d\t\t\tPosiÁ„o:%d\n", pos_p1, pos_p2);
+    //printf("\nPosi√ß√£o:%d\t\t\tPosi√ß√£o:%d\n", pos_p1, pos_p2);
     mudar_cor(-1);
-    // esses \t fazem o mesmo espaÁo de uma TAB
+    // esses \t fazem o mesmo espa√ßo de uma TAB
     /*
     printa:
     Jogador 1                       Jogador 2
     HP:(uma barra para cada hp)     Hp:15
-    PosiÁ„o:1                       PosiÁ„o:50*/
-
-
+    Posi√ß√£o:1                       Posi√ß√£o:50*/
 }
+
 void escolhas_p1()
 {
-    int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1);//pega a dist‚ncia entre os players
-    //variaveis do tipo bool que controlam as possÌveis aÁıes do player
+    int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1);//pega a distancia entre os players
+    //variaveis do tipo bool que controlam as poss√≠veis a√ß√µes do player
     int pode_atacar = 0, pode_defender = 1, pode_andar = 0, pode_recuar = 0;
 
     //se os players estiverem perto o bastante para atacar
@@ -484,7 +488,7 @@ void escolhas_p1()
     {
         pode_atacar = 1;
     }
-    if (p1_defendendo) //se o player j· estiver defendendo
+    if (p1_defendendo) //se o player j√° estiver defendendo
     {
         pode_defender = 0;
     }
@@ -497,10 +501,10 @@ void escolhas_p1()
         pode_recuar = 1;
     }
     if ( pode_andar) //ele vai mudar a cor do proximo print conforme o estado da variavel
-        mudar_cor(verde); //n„o precisa ter chave quando È sÛ um comando
+        mudar_cor(verde); //n√£o precisa ter chave quando √© s√≥ um comando
     else
-        mudar_cor(cinza); //se o player poder fazer a jogada, vai ficar verde, sen„o, cinza
-    printf("\n\n1 - AvanÁar");
+        mudar_cor(cinza); //se o player poder fazer a jogada, vai ficar verde, sen√£o, cinza
+    printf("\n\n1 - Avan√ßar");
     if ( pode_atacar)
         mudar_cor(verde);
     else
@@ -519,17 +523,18 @@ void escolhas_p1()
     mudar_cor(-1); //reseta a cor dos prints
     /*
     da print em:
-    1 - AvanÁar     3 - Atacar
+    1 - Avan√ßar     3 - Atacar
 
     2 - Recuar      4 - Defender
 
-    com a cor cinza nas opÁıes, se n„o for possÌvel realizar a aÁ„o, e verde se for possÌvel
+    com a cor cinza nas op√ß√µes, se n√£o for poss√≠vel realizar a a√ß√£o, e verde se for poss√≠vel
     */
 }
+
 void escolhas_p2()
 {
-    int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1);//pega a dist‚ncia entre os players
-    //variaveis do tipo bool que controlam as possÌveis aÁıes do player
+    int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1); //pega a distancia entre os players
+    //variaveis do tipo bool que controlam as poss√≠veis a√ß√µes do player
     int pode_atacar = 0, pode_defender = 1, pode_andar = 0, pode_recuar = 0;
 
     //se os players estiverem perto o bastante para atacar
@@ -538,7 +543,7 @@ void escolhas_p2()
         pode_atacar = 1;
 
     }
-    if (p2_defendendo) //se o player j· estiver defendendo
+    if (p2_defendendo) //se o player j√° estiver defendendo
     {
         pode_defender = 0;
     }
@@ -551,10 +556,10 @@ void escolhas_p2()
         pode_recuar = 1;
     }
     if ( pode_andar) //ele vai mudar a cor do proximo print conforme o estado da variavel
-        mudar_cor(verde); //n„o precisa ter chave quando È sÛ um comando
+        mudar_cor(verde); //n√£o precisa ter chave quando √© s√≥ um comando
     else
-        mudar_cor(cinza); //se o player poder fazer a jogada, vai ficar verde, sen„o, cinza
-    printf("\n\n1 - AvanÁar");
+        mudar_cor(cinza); //se o player poder fazer a jogada, vai ficar verde, sen√£o, cinza
+    printf("\n\n1 - Avan√ßar");
     if ( pode_atacar)
         mudar_cor(verde);
     else
@@ -573,44 +578,45 @@ void escolhas_p2()
     mudar_cor(-1); //reseta a cor dos prints
     /*
     da print em:
-    1 - AvanÁar     3 - Atacar
+    1 - Avan√ßar     3 - Atacar
 
     2 - Recuar      4 - Defender
 
-    com a cor cinza nas opÁıes, se n„o for possÌvel realizar a aÁ„o, e verde se for possÌvel
+    com a cor cinza nas op√ß√µes, se n√£o for poss√≠vel realizar a a√ß√£o, e verde se for poss√≠vel
     */
 }
+
 void player1()
 {
     p1_ja_jogou = 1;
-    int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1);//pega a dist‚ncia entre os players
+    int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1); //pega a distancia entre os players
 
-    if (escolha == 1) //escolheu avanÁar
+    if (escolha == 1) //escolheu avan√ßar
     {
         int maximo_de_casas_pode_andar = 5;
-        if ((pos_p2 - pos_p1+1) >= 5) //se o n˙mero de casas entre os players for maior que 5, o n˙mero maximo de casas fica com 5
+        if ((pos_p2 - pos_p1+1) >= 5) //se o n√∫mero de casas entre os players for maior que 5, o n√∫mero maximo de casas fica com 5
         {
             maximo_de_casas_pode_andar = 5;
         }
         else
         {
-            maximo_de_casas_pode_andar = (pos_p2 - (pos_p1+1)); //pega quantas casas tem livre para a movimentaÁ„o
-            //                                             +1 para que os players n„o fiquem na mesma casa
+            maximo_de_casas_pode_andar = (pos_p2 - (pos_p1+1)); //pega quantas casas tem livre para a movimenta√ß√£o
+            //                                             +1 para que os players n√£o fiquem na mesma casa
         }
-        printf("Digite quantas casas vocÍ quer andar (de 1 a %d): ", maximo_de_casas_pode_andar);
-        scanf("%d", &escolha); //recebe quantas casas o player quer avanÁas
+        printf("Digite quantas casas voc√™ quer andar (de 1 a %d): ", maximo_de_casas_pode_andar);
+        scanf("%d", &escolha); //recebe quantas casas o player quer avan√ßar
         if (escolha >= 1 && escolha <= maximo_de_casas_pode_andar)
         {
-            if (quantas_casas_tem_entre_os_players > 1) //se os jogadores n„o estiverem um olhando para a cara do outro
+            if (quantas_casas_tem_entre_os_players > 1) //se os jogadores n√£o estiverem um olhando para a cara do outro
             {
-                if (pos_p2 - (pos_p1+escolha) >= 0) //se, quando o player andar, ele n„o atravessar o player 2
+                if (pos_p2 - (pos_p1+escolha) >= 0) //se, quando o player andar, ele n√£o atravessar o player 2
                 {
-                    pos_p1 += escolha; //a posiÁ„o atual do player 1 soma quantas casas ele escolheu andar
+                    pos_p1 += escolha; //a posi√ß√£o atual do player 1 soma quantas casas ele escolheu andar
                 }
                 else
                 {
                     pos_p1 += (pos_p2 - (pos_p1+1)); //mais do que esse valor o player 1 vai passar para o lado direito
-                    //                         +1 para que os players n„o fiquem na mesma casa
+                    //                         +1 para que os players n√£o fiquem na mesma casa
                 }
             }
         }
@@ -626,29 +632,29 @@ void player1()
     {
         int maximo_de_casas_pode_recuar = 5;
 
-        //verificaÁ„o de quantas casas livres para recuar
+        //verifica√ß√£o de quantas casas livres para recuar
 
-        if (pos_p1 > 5) //se o n˙mero de casas entre o player e a parede (posiÁ„o 0) for maior que 5
+        if (pos_p1 > 5) //se o n√∫mero de casas entre o player e a parede (posi√ß√£o 0) for maior que 5
         {
             maximo_de_casas_pode_recuar = 5;
         }
         else
         {
             maximo_de_casas_pode_recuar = (pos_p1 - 1);
-            //se ele estiver menos de 5 casas da parede, ele sÛ vai poder recuar , no maximo, a posiÁ„o dele -1
-            //pois, ele n„o vai poder entrar na parede(posiÁ„o 0)
+            //se ele estiver menos de 5 casas da parede, ele s√≥ vai poder recuar , no maximo, a posi√ß√£o dele -1
+            //pois, ele n√£o vai poder entrar na parede(posi√ß√£o 0)
         }
 
-        //verificaÁ„o de escolha
+        //verifica√ß√£o de escolha
         if (maximo_de_casas_pode_recuar != 0) //se o jogador estiver com pelo menos 1 casa para recuar
         {
-            printf("Digite quantas casas vocÍ quer recuar (de 1 a %d): ", maximo_de_casas_pode_recuar);
+            printf("Digite quantas casas voc√™ quer recuar (de 1 a %d): ", maximo_de_casas_pode_recuar);
             scanf("%d", &escolha); //recebe quantas casas o player quer recuar
             if (escolha >= 1 && escolha <= maximo_de_casas_pode_recuar) //se a escolha do player for valida (esta dentro das escolhas)
             {
-                pos_p1 -= escolha; //o valor È simplesmente retirado, pois j· foi verificado se o n˙mero È valido
+                pos_p1 -= escolha; //o valor √© simplesmente retirado, pois j√° foi verificado se o n√∫mero √© valido
             }
-            else //se n„o estiver, ele perde o turno
+            else //se n√£o estiver, ele perde o turno
             {
                 mudar_cor(207); //mensagem com o fundo vermelho
                 printf("Escolha uma quantidade valida! Perdeu o turno");
@@ -659,19 +665,19 @@ void player1()
         else
         {
             mudar_cor(207);
-            printf("VocÍ j· est· no canto da arena! N„o tem como recuar mais!");
+            printf("Voc√™ j√° est√° no canto da arena! N√£o tem como recuar mais!");
             Sleep(2000);
             mudar_cor(-1);
         }
     }
     else if (escolha == 3) //escolheu atacar
     {
-        if (atacar(1)) //se a funÁ„o retornou true, È pq o ataque È possivel, logo a variavel global foi mudada
+        if (atacar(1)) //se a fun√ß√£o retornou true, √© pq o ataque √© poss√≠vel, logo a variavel global foi mudada
         {
             ataque(p1_atacando, p2_atacando);
             Sleep(2000);
         }
-        else //se a funÁ„o retornou false, È porque o player est· muito longe para atacar
+        else //se a fun√ß√£o retornou false, √© porque o player est√° muito longe para atacar
         {
             mudar_cor(207);
             printf("Player 2 esta muito longe.");
@@ -684,44 +690,45 @@ void player1()
         p1_defendendo = 1;
         turnos_p1_defendendo++;
     }
-    else //escolheu um n˙mero menor que 1 e maior que 4
+    else //escolheu um n√∫mero menor que 1 e maior que 4
     {
 		mudar_cor(207);
-        printf("Escolha inv·lida, perdeu um turno.");
+        printf("Escolha inv√°lida, perdeu um turno.");
         Sleep(2000);
 		mudar_cor(-1);
     }
 }
+
 void player2()
 {
-    int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1);//pega a dist‚ncia entre os players
+    int quantas_casas_tem_entre_os_players = (pos_p2 - pos_p1); //pega a distancia entre os players
 
-    if (escolha == 1) //escolheu avanÁar
+    if (escolha == 1) //escolheu avan√ßar
     {
         int maximo_de_casas_pode_andar = 5;
-        if ((pos_p2 - pos_p1+1) > 5) //se o n˙mero de casas entre os players for maior que 5, o n˙mero maximo de casas fica com 5
+        if ((pos_p2 - pos_p1+1) > 5) //se o n√∫mero de casas entre os players for maior que 5, o n√∫mero maximo de casas fica com 5
         {
             maximo_de_casas_pode_andar = 5;
         }
         else
         {
-            maximo_de_casas_pode_andar = (pos_p2 - (pos_p1+1)); //pega quantas casas tem livre para a movimentaÁ„o
-            //                                             +1 para que os players n„o fiquem na mesma casa
+            maximo_de_casas_pode_andar = (pos_p2 - (pos_p1+1)); //pega quantas casas tem livre para a movimenta√ß√£o
+            //                                             +1 para que os players n√£o fiquem na mesma casa
         }
-        printf("Digite quantas casas vocÍ quer andar (de 1 a %d): ", maximo_de_casas_pode_andar);
-        scanf("%d", &escolha); //recebe quantas casas o player quer avanÁas
+        printf("Digite quantas casas voc√™ quer andar (de 1 a %d): ", maximo_de_casas_pode_andar);
+        scanf("%d", &escolha); //recebe quantas casas o player quer avan√ßar
         if (escolha >= 1 && escolha <= maximo_de_casas_pode_andar)
         {
-            if (quantas_casas_tem_entre_os_players > 1) //se os jogadores n„o estiverem um olhando para a cara do outro
+            if (quantas_casas_tem_entre_os_players > 1) //se os jogadores n√£o estiverem um olhando para a cara do outro
             {
-                if (pos_p2 - (pos_p1+escolha) >= 0) //se, quando o player andar, ele n„o atravessar o player 1
+                if (pos_p2 - (pos_p1+escolha) >= 0) //se, quando o player andar, ele n√£o atravessar o player 1
                 {
-                    pos_p2 -= escolha; //a posiÁ„o atual do player 2 tira quantas casas ele escolheu andar
+                    pos_p2 -= escolha; //a posi√ß√£o atual do player 2 tira quantas casas ele escolheu andar
                 }
                 else
                 {
                     pos_p2 -= (pos_p2 - (pos_p1+1)); //mais do que esse valor o player 2 vai passar para o lado esquerdo
-                    //                         +1 para que os players n„o fiquem na mesma casa
+                    //                         +1 para que os players n√£o fiquem na mesma casa
                 }
             }
         }
@@ -737,29 +744,29 @@ void player2()
     {
         int maximo_de_casas_pode_recuar = 5;
 
-        //verificaÁ„o de quantas casas livres para recuar
+        //verifica√ß√£o de quantas casas livres para recuar
 
-        if (pos_p2 < 45) //se o n˙mero de casas entre o player e a parede (posiÁ„o 50) for menor que 45
+        if (pos_p2 < 45) //se o n√∫mero de casas entre o player e a parede (posi√ß√£o 50) for menor que 45
         {
             maximo_de_casas_pode_recuar = 5;
         }
         else
         {
             maximo_de_casas_pode_recuar = (50 - pos_p2);
-            //se ele estiver menos de 5 casas da parede, ele sÛ vai poder recuar , no maximo, a posiÁ„o dele -1
-            //pois, ele n„o vai poder entrar na parede(posiÁ„o 0)
+            //se ele estiver menos de 5 casas da parede, ele s√≥ vai poder recuar , no maximo, a posi√ß√£o dele -1
+            //pois, ele n√£o vai poder entrar na parede(posi√ß√£o 0)
         }
 
-        //verificaÁ„o de escolha
+        //verifica√ß√£o de escolha
         if (maximo_de_casas_pode_recuar != 0) //se o jogador estiver com pelo menos 1 casa para recuar
         {
-            printf("Digite quantas casas vocÍ quer recuar (de 1 a %d): ", maximo_de_casas_pode_recuar);
+            printf("Digite quantas casas voc√™ quer recuar (de 1 a %d): ", maximo_de_casas_pode_recuar);
             scanf("%d", &escolha); //recebe quantas casas o player quer recuar
             if (escolha >= 1 && escolha <= maximo_de_casas_pode_recuar) //se a escolha do player for valida (esta dentro das escolhas)
             {
-                pos_p2 += escolha; //o valor È simplesmente retirado, pois j· foi verificado se o n˙mero È valido
+                pos_p2 += escolha; //o valor √© simplesmente retirado, pois j√° foi verificado se o n√∫mero √© valido
             }
-            else //se n„o estiver, ele perde o turno
+            else //se n√£o estiver, ele perde o turno
             {
                 mudar_cor(207); //mensagem com o fundo vermelho
                 printf("Escolha uma quantidade valida! Perdeu o turno");
@@ -770,19 +777,19 @@ void player2()
         else
         {
             mudar_cor(207);
-            printf("VocÍ j· est· no canto da arena! N„o tem como recuar mais!");
+            printf("Voc√™ j√° est√° no canto da arena! N√£o tem como recuar mais!");
             Sleep(2000);
             mudar_cor(-1);
         }
     }
     else if (escolha == 3) //escolheu atacar
     {
-        if (atacar(2)) //se a funÁ„o retornou true, È pq o ataque È possivel, logo a variavel global foi mudada
+        if (atacar(2)) //se a fun√ß√£o retornou true, √© pq o ataque √© poss√≠vel, logo a variavel global foi mudada
         {
             ataque(p1_atacando, p2_atacando);
             Sleep(2000);
         }
-        else //se a funÁ„o retornou false, È porque o player est· muito longe para atacar
+        else //se a fun√ß√£o retornou false, √© porque o player est√° muito longe para atacar
         {
             mudar_cor(207);
             printf("Player 2 esta muito longe.");
@@ -795,24 +802,25 @@ void player2()
         p2_defendendo = 1;
         turnos_p2_defendendo++;
     }
-    else //escolheu um n˙mero menor que 1 e maior que 4
+    else //escolheu um n√∫mero menor que 1 e maior que 4
     {
 		mudar_cor(207);
-        printf("Escolha inv·lida, perdeu um turno.");
+        printf("Escolha inv√°lida, perdeu um turno.");
         Sleep(2000);
 		mudar_cor(-1);
     }
     p2_ja_jogou = 1;
 }
+
 int main()
 {
     setlocale(LC_ALL, "");
 
 
-    //Variavel do tipo bool que guarda se o jogo deve continuar ou n„o
+    //Variavel do tipo bool que guarda se o jogo deve continuar ou n√£o
     int jogo_deve_continuar = 1;
 
-    //Variavel que vai guardar quantos turnos j· passaram
+    //Variavel que vai guardar quantos turnos j√° passaram
     mudar_cor(roxo);
     printf("Bem vindo ao %s!!", nome_do_jogo);
     Sleep(3000); //espera 3 segundos
@@ -820,9 +828,9 @@ int main()
 
     while (jogo_deve_continuar)
     {
-        if(! p1_ja_jogou) //se o player 1 n„o jogou
+        if(! p1_ja_jogou) //se o player 1 n√£o jogou
         {
-            if(p1_defendendo) //verifica quantos a turnos que o player est· se defendendo, se for 1, ele para de se defender, se for 0, ele continua se defendendo
+            if(p1_defendendo) //verifica quantos a turnos que o player est√° se defendendo, se for 1, ele para de se defender, se for 0, ele continua se defendendo
             {
                 if(turnos_p1_defendendo == 0)
                 {
@@ -834,18 +842,18 @@ int main()
                     p1_defendendo = 0;
                 }
             }
-            status(); //da um print na posiÁ„o e  no hp atual de cada players
+            status(); //da um print na posi√ß√£o e  no hp atual de cada players
             escolhas_p1(); //da um print nas escolhas que o player pode fazer
             mudar_cor(azul);
-            printf("\n\nJogador 1, qual aÁ„o vocÍ quer fazer: ");
+            printf("\n\nJogador 1, qual a√ß√£o voc√™ quer fazer: ");
             scanf("%d", &escolha); //recebe o input do player 1
             mudar_cor(-1); //reseta a cor dos prints
             player1();
             p1_ja_jogou = 1;
         }
-        if (! p2_ja_jogou) //se o player 2 n„o jogou
+        if (! p2_ja_jogou) //se o player 2 n√£o jogou
         {
-            if(p2_defendendo) //verifica quantos a turnos que o player est· se defendendo, se for 1, ele para de se defender, se for 0, ele continua se defendendo
+            if(p2_defendendo) //verifica quantos a turnos que o player est√° se defendendo, se for 1, ele para de se defender, se for 0, ele continua se defendendo
             {
                 if(turnos_p2_defendendo == 0)
                 {
@@ -857,10 +865,10 @@ int main()
                     p2_defendendo = 0;
                 }
             }
-            status(); //da um print na posiÁ„o e  no hp atual de cada players
+            status(); //da um print na posi√ß√£o e  no hp atual de cada players
             escolhas_p2(); //da um print nas escolhas que o player pode fazer
             mudar_cor(azul);
-            printf("\n\nJogador 2, qual aÁ„o vocÍ quer fazer: ");
+            printf("\n\nJogador 2, qual a√ß√£o voc√™ quer fazer: ");
             scanf("%d", &escolha); //recebe o input do player 2
             mudar_cor(-1); //reseta a cor dos prints
             player2();
@@ -892,10 +900,10 @@ int main()
             mudar_cor(-1); //reseta o print
             jogo_deve_continuar = 0;
         }
-        else //sen„o, jogo continua
+        else //sen√£o, jogo continua
         {
             jogo_deve_continuar = 1;
-            turnos++; //se o jogo continuar, È adicionado 1 turno
+            turnos++; //se o jogo continuar, √© adicionado 1 turno
             //reseta as variaveis
             p1_atacando = 0;
             p2_atacando = 0;
@@ -909,7 +917,7 @@ int main()
 }
 
 /*
-codigo que da print em todas as cores e seus respectivos codigos:
+c√≥digo que da print em todas as cores e seus respectivos c√≥digos:
 
 #include <stdio.h>
 #include <windows.h>
@@ -924,7 +932,7 @@ int main()
    for(int c = 0; c <= 255; c++)
    {
        mudar_cor(c);
-       printf("Print colorido com o codigo %d\n", c);}
+       printf("Print colorido com o c√≥digo %d\n", c);}
     return 0;
 }
 */
